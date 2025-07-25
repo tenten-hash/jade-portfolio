@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"/>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      color: #ededed;
+      background: transparent;
+      position: relative;
+      z-index: 0;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 10%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 25px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: default;
+    }
+
+    .navbar a {
+      font-size: 18px;
+      color: #fff;
+      text-decoration: none;
+      margin-left: 35px;
+      transition: .3s;
+    }
+
+    .navbar a:hover {
+      color: #0ef;
+    }
+
+    .home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 10%;
+      height: 100vh;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .home-content {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .home-content h3 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .home-content h1 {
+      font-size: 49px;
+      font-weight: 700;
+      margin: -3px 0;
+    }
+
+    .home-content h3 span {
+      color: #0ef;
+    }
+
+    .home-content p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .home-sci a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 2px solid #0ef;
+      border-radius: 50%;
+      font-size: 20px;
+      color: #0ef;
+      text-decoration: none;
+      margin-right: 15px;
+      transition: 0.5s ease;
+    }
+
+    .home-sci a:hover {
+      background: #0ef;
+      color: #081b29;
+      box-shadow: 0 0 20px #0ef;
+    }
+
+    .btn-box {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #0ef;
+      border-radius: 40px;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #081b29;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 5px #0ef, 0 0 25px #0ef;
+      transition: 0.5s;
+    }
+
+    .btn-box:hover {
+      box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan;
+    }
+
+    .home-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 300px;
+    }
+
+    .home-img img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .home {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 140px;
+      }
+
+      .home-img img {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+    }
+
+    /* The rest of the code remains unchanged */
+    .about {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      padding: 100px 10%;
+      gap: 2rem;
+    }
+
+    .about-img img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 8px;
+    }
+
+    .about-text h2 {
+      font-size: 60px;
+    }
+
+    .about-text h2 span {
+      color: #0ef;
+    }
+
+    .about-text h4 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 15px 0 30px;
+    }
+
+    .about-text p {
+      font-size: 20px;
+      line-height: 1.4;
+      margin-bottom: 4rem;
+    }
+
+    .services {
+      padding: 100px 10%;
+    }
+
+    .sub-title {
+      text-align: center;
+      font-size: 60px;
+      margin-bottom: 70px;
+    }
+
+    .sub-title span {
+      color: #0ef;
+    }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .services-list div {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px #0ef;
+      transition: 0.3s ease;
+    }
+
+    .services-list div:hover {
+      transform: translateY(-10px);
+    }
+
+    .services-list div i {
+      font-size: 40px;
+      color: #0ef;
+      margin-bottom: 20px;
+    }
+
+    .services-list div h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .services-list div p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .read {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #0ef;
+      color: #081b29;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+    }
+
+    .read:hover {
+      box-shadow: 0 0 10px cyan;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      padding: 100px 10%;
+    }
+
+    .contact-text h2 {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .contact-text h2 span {
+      color: #0ef;
+    }
+
+    .contact-text p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .contact-list li {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .contact-list i {
+      color: #0ef;
+      margin-right: 10px;
+    }
+
+    .contact-icons a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      background: transparent;
+      border: 2px solid #0ef;
+      border-radius: 50%;
+      color: #0ef;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .contact-icons a:hover {
+      background: #0ef;
+      color: #000;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #eee;
+      font-weight: 600;
+    }
+
+    .send {
+      background: #0ef;
+      color: #081b29;
+      font-weight: 600;
+      padding: 10px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .last-text {
+      text-align: center;
+      padding: 25px;
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0ef;
+      color: #000;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 768px) {
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="video/19419586-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay">
+    <header class="header">
+      <a href="#" class="logo">Portfolio ni Tenten</a>
+      <nav class="navbar">
+        <a href="#" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="home">
+      <div class="home-content">
+        <h3>Hello, It's Me</h3>
+        <h1>Tenten</h1>
+        <h3>And I am a <span class="text">Frontend Developer</span></h3>
+        <p>I am an IT student.</p>
+        <div class="home-sci">
+        <a href="https://www.instagram.com/numnum.19?igsh=MW1uY3hpcjBuoW84eA" style="--i:7"><i class='bx bxl-instagram'></i></box-icon></a>
+                <a href="https://wa.me/+639855004337" style="--i:8"><i class='bx bxl-whatsapp'></i></box-icon></a>
+                <a href="https://www.tiktok.com/@numnumnumsahur?_t=ZS-8yHkNbDuSMU&_r=1" style="--i:9"><i class='bx bxl-tiktok'></i></box-icon></a>
+                <a href="https://www.linkedin.com/in/ten-ten-01966232a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYk4%2BioJgT2WAz9MgLwlulQ%3D%3D" style="--i:10"><i class='bx bxl-linkedin' ></i></box-icon></a>
+                <a href="https://www.facebook.com/jade.villagracia.5" target="_blank"><i class='bx bxl-facebook'></i>
+</a>
+
+</div>
+        <a href="#about" class="btn-box">More About Me</a>
+      </div>
+      <div class="home-img">
+        <img src="images/yourphoto.jpg" alt="Your Photo">
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-img">
+        <img src="images/yourphoto.jpg" alt="Your Photo">
+      </div>
+      <div class="about-text">
+        <h2>About <span>Me</span></h2>
+        <h4>Jade Villagracia</h4>
+        <p>I’m a 19-year-old IT student who is just starting to explore frontend development, electronics, networking, and graphic design. I enjoy learning how to build websites and create designs that look good and work well.
+
+I'm always curious about how things work, and I love trying out new tools and technologies. As I continue to grow, I hope to gain more experience and build projects that help people and solve real problems.</p>
+        <a href="#contact" class="btn-box">Contact Me</a>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <h2 class="sub-title">My <span>Services</span></h2>
+      <div class="services-list">
+        <div>
+          <i class='bx bx-code'></i>
+          <h2>UI/UX Design</h2>
+          <p>Professional UI/UX design with modern and intuitive layouts.</p>
+          <a href="#contact" class="read">Contact me</a>
+        </div>
+        <div>
+          <i class='bx bx-crop'></i>
+          <h2>Graphic Design</h2>
+          <p>Creative graphic design for branding, content, and advertising.</p>
+          <a href="#contact" class="read">Contact me</a>
+        </div>
+        <div>
+          <i class='bx bxl-visual-studio'></i>
+          <h2>Frontend Dev</h2>
+          <p>Responsive and attractive websites using HTML, CSS, JavaScript, and React.</p>
+          <a href="#contact" class="read">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-text">
+        <h2>Contact <span>Me</span></h2>
+        <p>If you want to collaborate, get in touch!</p>
+        <ul class="contact-list">
+          <li><i class='bx bxs-send'></i> jadevillagracia@gmail.com</li>
+          <li><i class='bx bxs-phone'></i> 09855004337</li>
+        </ul>
+        <div class="contact-icons">
+           <a href="https://www.instagram.com/numnum.19?igsh=MW1uY3hpcjBuoW84eA" style="--i:7"><i class='bx bxl-instagram'></i></box-icon></a>
+                <a href="https://wa.me/+639855004337" style="--i:8"><i class='bx bxl-whatsapp'></i></box-icon></a>
+                <a href="https://www.tiktok.com/@numnumnumsahur?_t=ZS-8yHkNbDuSMU&_r=1" style="--i:9"><i class='bx bxl-tiktok'></i></box-icon></a>
+                <a href="https://www.linkedin.com/in/ten-ten-01966232a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYk4%2BioJgT2WAz9MgLwlulQ%3D%3D" style="--i:10"><i class='bx bxl-linkedin' ></i></box-icon></a>
+                <a href="https://www.facebook.com/jade.villagracia.5" target="_blank"><i class='bx bxl-facebook'></i>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form action="">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Your Message" required></textarea>
+          <input type="submit" value="Send" class="send" />
+        </form>
+      </div>
+    </section>
+
+    <div class="last-text">
+      <p>Developed by Jade Villagracia</p>
+    </div>
+
+    <a href="#" class="top"><i class='bx bx-up-arrow-alt'></i></a>
+  </div>
+
+  <script>
+    var typed = new Typed(".text", {
+      strings: [ "IT Student", "Learning Frontend Development", "Exploring Web Design",],
+      typeSpeed: 100,
+      backSpeed: 100,
+      backDelay: 1000,
+      loop: true
+    });
+  </script>
+</body>
+</html>
